@@ -37,6 +37,9 @@ vim.opt.breakindent = true
 -- Save undo history
 vim.opt.undofile = true
 
+-- Don't create swap files
+vim.opt.swapfile = false
+
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -80,7 +83,7 @@ vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
-vim.keymap.set('n', '<leader>se', '<cmd>Explore<CR>', { desc = '[S]earch by [E]xplore' })
+vim.keymap.set('n', '<leader>nt', '<cmd>Explore<CR>', { desc = 'Open [N]e[T]rw' })
 
 --- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -117,3 +120,11 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>')
+
+-- Keybind for plugins
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Open [U]ndo tree' })
+
+vim.keymap.set('n', '<C-_>', function()
+  return vim.v.count == 0 and '<Plug>(comment_toggle_linewise_current)' or '<Plug>(comment_toggle_linewise_count)'
+end, { expr = true })
+vim.keymap.set('x', '<C-_>', '<Plug>(comment_toggle_linewise_visual)')
